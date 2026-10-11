@@ -62,6 +62,7 @@ export default function AdminDashboard() {
   const [overview, setOverview] = useState(null);
   const [error, setError] = useState("");
   const [activityOpen, setActivityOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const currentNav = activityOpen ? "recent_activity" : "dashboard";
 
   useFullBleedRoot();
@@ -105,50 +106,77 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="admin-shell">
+    <div className={sidebarOpen ? "admin-shell" : "admin-shell is-sidebar-closed"}>
       <aside className="admin-sidebar">
         <div className="sidebar-body">
-          <div className="brand">
-            <img src={logo} alt="" />
-            <span className="brand-text">
-              <strong>mAIra</strong>
-              <span>Enterprise</span>
-            </span>
-          </div>
-          <nav className="admin-nav" aria-label="Admin">
-            {NAV.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                className="nav-button"
-                aria-current={item.id === currentNav ? "page" : undefined}
-                onClick={() => onNav(item.id)}
-              >
-                <Icon name={item.icon} />
-                <span className="nav-label">{item.label}</span>
-              </button>
-            ))}
-          </nav>
-          <div className="admin-profile">
-            <span className="avatar" aria-hidden="true">
-              AM
-            </span>
-            <span className="profile-copy">
-              <strong>Alex Mercer</strong>
-              <span>alex@maira.io</span>
-            </span>
-          </div>
+        <div className="brand">
+          <img src={logo} alt="" />
+          <span className="brand-text">
+            <strong>mAIra</strong>
+            <span>Enterprise</span>
+          </span>
+          <button
+            type="button"
+            className="sidebar-toggle"
+            aria-label="Close sidebar"
+            onClick={() => setSidebarOpen(false)}
+          >
+            <Icon name="sidebar" />
+          </button>
+        </div>
+        <nav className="admin-nav" aria-label="Admin">
+          {NAV.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className="nav-button"
+              aria-current={item.id === currentNav ? "page" : undefined}
+              onClick={() => onNav(item.id)}
+            >
+              <Icon name={item.icon} />
+              <span className="nav-label">{item.label}</span>
+            </button>
+          ))}
+        </nav>
+        <div className="admin-profile">
+          <span className="avatar" aria-hidden="true">
+            AM
+          </span>
+          <span className="profile-copy">
+            <strong>Alex Mercer</strong>
+            <span>alex@maira.io</span>
+          </span>
+        </div>
         </div>
       </aside>
 
       <div className="admin-column">
         <header className="admin-topbar">
+          <div className="topbar-brand-slot">
+            <button
+              type="button"
+              className="topbar-brand"
+              aria-label="Open sidebar"
+              aria-hidden={sidebarOpen}
+              tabIndex={sidebarOpen ? -1 : 0}
+              onClick={() => setSidebarOpen(true)}
+            >
+              <span className="topbar-brand-inner">
+                <img src={logo} alt="" />
+                <span className="brand-text">
+                  <strong>mAIra</strong>
+                  <span>Enterprise</span>
+                </span>
+              </span>
+            </button>
+          </div>
           <p className="crumb">
             <span>Admin Suite</span>
             <span aria-hidden="true">/</span>
             <strong>Admin Dashboard</strong>
           </p>
         </header>
+
         <main className="admin-content">
           <div className="welcome">
             <div className="welcome-title">
@@ -157,6 +185,7 @@ export default function AdminDashboard() {
             </div>
             <p>A summary of people and usage across the workspace.</p>
           </div>
+
           {error ? <p className="admin-status">{error}</p> : null}
           {!overview && !error ? <p className="admin-status">Loading dashboard…</p> : null}
           {overview ? (
@@ -167,6 +196,7 @@ export default function AdminDashboard() {
           ) : null}
         </main>
       </div>
+
       {overview ? (
         <ActivityPanel
           open={activityOpen}

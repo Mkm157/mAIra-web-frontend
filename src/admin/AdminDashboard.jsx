@@ -5,6 +5,7 @@ import {
   dashboardOverviewRequest,
   dashboardOverviewResponse,
 } from "../services/mockData";
+import ActivityPanel from "./ActivityPanel";
 import Icon from "./icons";
 import MetricCards from "./MetricCards";
 import UsageOverview from "./UsageOverview";
@@ -60,6 +61,8 @@ function useFullBleedRoot() {
 export default function AdminDashboard() {
   const [overview, setOverview] = useState(null);
   const [error, setError] = useState("");
+  const [activityOpen, setActivityOpen] = useState(false);
+  const currentNav = activityOpen ? "recent_activity" : "dashboard";
 
   useFullBleedRoot();
 
@@ -91,6 +94,16 @@ export default function AdminDashboard() {
     };
   }, []);
 
+  const onNav = (id) => {
+    if (id === "recent_activity") {
+      setActivityOpen((open) => !open);
+      return;
+    }
+    if (id === "dashboard") {
+      setActivityOpen(false);
+    }
+  };
+
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
@@ -108,7 +121,8 @@ export default function AdminDashboard() {
                 key={item.id}
                 type="button"
                 className="nav-button"
-                aria-current={item.id === "dashboard" ? "page" : undefined}
+                aria-current={item.id === currentNav ? "page" : undefined}
+                onClick={() => onNav(item.id)}
               >
                 <Icon name={item.icon} />
                 <span className="nav-label">{item.label}</span>
@@ -153,6 +167,13 @@ export default function AdminDashboard() {
           ) : null}
         </main>
       </div>
+      {overview ? (
+        <ActivityPanel
+          open={activityOpen}
+          events={overview.activity}
+          onClose={() => setActivityOpen(false)}
+        />
+      ) : null}
     </div>
   );
 }

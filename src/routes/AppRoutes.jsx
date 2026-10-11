@@ -1,5 +1,6 @@
 
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import AdminDashboard from "../admin/AdminDashboard";
 
 const pages = [
   ["Registration", "/registration"],
@@ -44,7 +45,13 @@ export default function AppRoutes() {
           <Route
             key={path}
             path={path}
-            element={<Placeholder title={title} />}
+            element={
+              path === "/admin" ? (
+                <AdminDashboard />
+              ) : (
+                <Placeholder title={title} />
+              )
+            }
           />
         ))}
         <Route path="*" element={<Navigate to="/" replace />} />

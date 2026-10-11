@@ -1,6 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/logo.jpg";
+import { sendRequest } from "../services/api";
+import {
+  dashboardOverviewRequest,
+  dashboardOverviewResponse,
+} from "../services/mockData";
 import Icon from "./icons";
+import MetricCards from "./MetricCards";
 import "./AdminDashboard.css";
 
 const NAV = [
@@ -51,7 +57,38 @@ function useFullBleedRoot() {
 }
 
 export default function AdminDashboard() {
+  const [overview, setOverview] = useState(null);
+  const [error, setError] = useState("");
+
   useFullBleedRoot();
+
+  useEffect(() => {
+    let active = true;
+    const request = import.meta.env.VITE_API_BASE_URL
+      ? sendRequest(dashboardOverviewRequest)
+      : Promise.resolve(dashboardOverviewResponse);
+
+    request
+      .then((response) => {
+        if (!active) {
+          return;
+        }
+        if (response.statusCode !== "1" || !response.payload) {
+          setError(response.statusMsg || "The dashboard could not be loaded.");
+          return;
+        }
+        setOverview(response.payload);
+      })
+      .catch(() => {
+        if (active) {
+          setError("The dashboard could not be loaded.");
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <div className="admin-shell">
@@ -105,6 +142,9 @@ export default function AdminDashboard() {
             </div>
             <p>A summary of people and usage across the workspace.</p>
           </div>
+          {error ? <p className="admin-status">{error}</p> : null}
+          {!overview && !error ? <p className="admin-status">Loading dashboard…</p> : null}
+          {overview ? <MetricCards overview={overview} /> : null}
         </main>
       </div>
     </div>

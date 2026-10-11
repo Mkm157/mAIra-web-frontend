@@ -7,6 +7,7 @@ import {
 } from "../services/mockData";
 import Icon from "./icons";
 import MetricCards from "./MetricCards";
+import UsageOverview from "./UsageOverview";
 import "./AdminDashboard.css";
 
 const NAV = [
@@ -144,7 +145,12 @@ export default function AdminDashboard() {
           </div>
           {error ? <p className="admin-status">{error}</p> : null}
           {!overview && !error ? <p className="admin-status">Loading dashboard…</p> : null}
-          {overview ? <MetricCards overview={overview} /> : null}
+          {overview ? (
+            <>
+              <MetricCards overview={overview} />
+              <UsageOverview usage={overview.usage} peakQueryHour={overview.peakQueryHour} />
+            </>
+          ) : null}
         </main>
       </div>
     </div>

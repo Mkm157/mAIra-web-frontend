@@ -1,6 +1,6 @@
 
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
-
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom"; 
+import Registration from "../pages/Registration";
 const pages = [
   ["Registration", "/registration"],
   ["Email Verification", "/email-verification"],
@@ -39,7 +39,8 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} /> 
+        <Route path="/registration" element={<Registration />} />
         {pages.map(([title, path]) => (
           <Route
             key={path}

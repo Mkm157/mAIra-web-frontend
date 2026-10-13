@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
+import logo from "../assets/logo.png";
 import "./Registration.css";
 
 export default function Registration() {
@@ -29,7 +30,7 @@ export default function Registration() {
   return (
     <div className="reg-page">
       <div className="reg-brand">
-        <span className="reg-logo">◐</span>
+       <img src={logo} alt="mAIra logo" className="reg-logo-img" />
         <span className="reg-name">mAIra</span>
         <span className="reg-pill">AI Workspace</span>
       </div>

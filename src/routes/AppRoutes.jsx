@@ -1,5 +1,12 @@
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Link,
+} from "react-router-dom";
 
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import PasswordReset from "../pages/PasswordReset";
 
 const pages = [
   ["Registration", "/registration"],
@@ -16,6 +23,7 @@ function Home() {
     <main style={{ padding: 32, fontFamily: "Arial" }}>
       <h1>mAIra</h1>
       <p>Choose a screen to begin.</p>
+
       {pages.map(([name, path]) => (
         <p key={path}>
           <Link to={path}>{name}</Link>
@@ -29,8 +37,12 @@ function Placeholder({ title }) {
   return (
     <main style={{ padding: 32, fontFamily: "Arial" }}>
       <Link to="/">← Home</Link>
+
       <h1>{title}</h1>
-      <p>This screen is ready for its assigned team member to implement.</p>
+
+      <p>
+        This screen is ready for its assigned team member to implement.
+      </p>
     </main>
   );
 }
@@ -40,13 +52,21 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+
         {pages.map(([title, path]) => (
           <Route
             key={path}
             path={path}
-            element={<Placeholder title={title} />}
+            element={
+              path === "/password-reset" ? (
+                <PasswordReset />
+              ) : (
+                <Placeholder title={title} />
+              )
+            }
           />
         ))}
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

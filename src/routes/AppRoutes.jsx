@@ -6,7 +6,11 @@ import {
   Link,
 } from "react-router-dom";
 
+feat/password-reset
+import PasswordReset from "../pages/PasswordReset";
+
 import Login from "../loginpage/Login";
+ main
 
 const pages = [
   ["Registration", "/registration"],
@@ -37,7 +41,12 @@ function Placeholder({ title }) {
   return (
     <main style={{ padding: 32, fontFamily: "Arial, sans-serif" }}>
       <Link to="/">← Home</Link>
+
       <h1>{title}</h1>
+ feat/password-reset
+
+
+ main
       <p>
         This screen is ready for its assigned team member to implement.
       </p>
@@ -51,6 +60,23 @@ export default function AppRoutes() {
       <Routes>
         {/* Home Page */}
         <Route path="/" element={<Home />} />
+
+feat/password-reset
+        {pages.map(([title, path]) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              path === "/password-reset" ? (
+                <PasswordReset />
+              ) : (
+                <Placeholder title={title} />
+              )
+            }
+          />
+        ))}
+
+        <Route path="*" element={<Navigate to="/" replace />} />
 
         {/* Login Page */}
         <Route path="/login" element={<Login />} />
@@ -71,6 +97,7 @@ export default function AppRoutes() {
           path="*"
           element={<Navigate to="/" replace />}
         />
+ main
       </Routes>
     </BrowserRouter>
   );

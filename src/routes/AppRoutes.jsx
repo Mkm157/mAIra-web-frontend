@@ -6,7 +6,11 @@ import {
   Link,
 } from "react-router-dom";
 
+feat/password-reset
 import PasswordReset from "../pages/PasswordReset";
+
+import Login from "../loginpage/Login";
+ main
 
 const pages = [
   ["Registration", "/registration"],
@@ -20,7 +24,7 @@ const pages = [
 
 function Home() {
   return (
-    <main style={{ padding: 32, fontFamily: "Arial" }}>
+    <main style={{ padding: 32, fontFamily: "Arial, sans-serif" }}>
       <h1>mAIra</h1>
       <p>Choose a screen to begin.</p>
 
@@ -35,11 +39,14 @@ function Home() {
 
 function Placeholder({ title }) {
   return (
-    <main style={{ padding: 32, fontFamily: "Arial" }}>
+    <main style={{ padding: 32, fontFamily: "Arial, sans-serif" }}>
       <Link to="/">← Home</Link>
 
       <h1>{title}</h1>
+ feat/password-reset
 
+
+ main
       <p>
         This screen is ready for its assigned team member to implement.
       </p>
@@ -51,8 +58,10 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Home Page */}
         <Route path="/" element={<Home />} />
 
+feat/password-reset
         {pages.map(([title, path]) => (
           <Route
             key={path}
@@ -68,6 +77,27 @@ export default function AppRoutes() {
         ))}
 
         <Route path="*" element={<Navigate to="/" replace />} />
+
+        {/* Login Page */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Other Application Pages */}
+        {pages
+          .filter(([name]) => name !== "Login")
+          .map(([title, path]) => (
+            <Route
+              key={path}
+              path={path}
+              element={<Placeholder title={title} />}
+            />
+          ))}
+
+        {/* Redirect Unknown Routes */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
+ main
       </Routes>
     </BrowserRouter>
   );

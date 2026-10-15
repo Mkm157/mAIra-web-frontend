@@ -1,19 +1,18 @@
-
 const variants = {
   success: {
-    background: "#ecfdf5",
-    color: "#065f46",
-    border: "#10b981",
+    background: "rgba(16, 185, 129, 0.15)",
+    color: "#34d399",
+    border: "1px solid rgba(16, 185, 129, 0.3)",
   },
   error: {
-    background: "#fef2f2",
-    color: "#991b1b",
-    border: "#ef4444",
+    background: "rgba(239, 68, 68, 0.15)",
+    color: "#f87171",
+    border: "1px solid rgba(239, 68, 68, 0.3)",
   },
   info: {
-    background: "#eff6ff",
-    color: "#1e40af",
-    border: "#3b82f6",
+    background: "rgba(59, 130, 246, 0.15)",
+    color: "#60a5fa",
+    border: "1px solid rgba(59, 130, 246, 0.3)",
   },
 };
 
@@ -27,12 +26,14 @@ export default function Alert({
     <div
       role={variant === "error" ? "alert" : "status"}
       style={{
-        padding: 12,
-        borderRadius: 8,
+        padding: "12px 16px",
+        borderRadius: "8px",
         background: style.background,
         color: style.color,
-        borderLeft: `4px solid ${style.border}`,
-        marginBottom: 16,
+        border: style.border,
+        fontSize: "14px",
+        fontWeight: "500",
+        marginBottom: "16px",
       }}
     >
       {children}

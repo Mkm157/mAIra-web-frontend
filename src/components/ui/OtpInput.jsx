@@ -1,4 +1,3 @@
-
 import { useRef } from "react";
 
 export default function OtpInput({
@@ -29,29 +28,49 @@ export default function OtpInput({
   }
 
   return (
-    <div style={{ display: "flex", gap: 8 }}>
-      {Array.from({ length }, (_, index) => (
-        <input
-          key={index}
-          ref={(element) => (refs.current[index] = element)}
-          aria-label={`Verification digit ${index + 1}`}
-          inputMode="numeric"
-          autoComplete={index === 0 ? "one-time-code" : "off"}
-          maxLength={1}
-          value={value[index] || ""}
-          disabled={disabled}
-          onChange={(event) => handleChange(index, event.target.value)}
-          onKeyDown={(event) => handleKeyDown(index, event)}
-          style={{
-            width: 42,
-            height: 48,
-            textAlign: "center",
-            fontSize: 20,
-            border: "1px solid #d1d5db",
-            borderRadius: 8,
-          }}
-        />
-      ))}
+    <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+      {Array.from({ length }, (_, index) => {
+        const char = value[index] || "";
+        return (
+          <input
+            key={index}
+            ref={(el) => (refs.current[index] = el)}
+            type="text"
+            inputMode="numeric"
+            maxLength={1}
+            value={char}
+            disabled={disabled}
+            onChange={(e) => handleChange(index, e.target.value)}
+            onKeyDown={(e) => handleKeyDown(index, e)}
+            style={{
+              width: "48px",
+              height: "56px",
+              textAlign: "center",
+              fontSize: "20px",
+              fontWeight: "600",
+              color: "#ffffff",
+              background: "rgba(15, 23, 42, 0.6)",
+              border: char
+                ? "1px solid #3b82f6"
+                : "1px solid rgba(255, 255, 255, 0.12)",
+              borderRadius: "8px",
+              outline: "none",
+              transition: "all 0.2s ease-in-out",
+              boxShadow: char ? "0 0 10px rgba(59, 130, 246, 0.3)" : "none",
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = "#3b82f6";
+              e.target.style.boxShadow = "0 0 12px rgba(59, 130, 246, 0.4)";
+            }}
+            onBlur={(e) => {
+              if (!char) {
+                e.target.style.borderColor = "rgba(255, 255, 255, 0.12)";
+                e.target.style.boxShadow = "none";
+              }
+            }}
+          />
+        );
+      })}
     </div>
   );
 }

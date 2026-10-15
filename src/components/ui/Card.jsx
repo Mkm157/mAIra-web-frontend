@@ -1,4 +1,3 @@
-
 export default function Card({
   children,
   title,
@@ -8,21 +7,21 @@ export default function Card({
     <section
       className={className}
       style={{
-        background: "#ffffff",
-        border: "1px solid #e5e7eb",
-        borderRadius: 12,
-        padding: 24,
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+        background: "rgba(15, 23, 42, 0.75)",
+        backdropFilter: "blur(12px)",
+        border: "1px solid rgba(255, 255, 255, 0.08)",
+        borderRadius: "12px",
+        padding: "24px",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
+        color: "#ffffff",
       }}
     >
       {title && (
-        <h2 style={{ marginTop: 0, marginBottom: 20 }}>
+        <h2 style={{ marginTop: 0, marginBottom: "20px", fontSize: "20px", fontWeight: "600" }}>
           {title}
         </h2>
       )}
-
       {children}
     </section>
   );
 }
-

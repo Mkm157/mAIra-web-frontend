@@ -7,6 +7,7 @@ import {
   Link,
 } from "react-router-dom";
 
+import AdminDashboard from "../admin/AdminDashboard";
 import PasswordReset from "../pages/PasswordReset";
 import Login from "../loginpage/Login";
 
@@ -62,6 +63,8 @@ export default function AppRoutes() {
                 <Login />
               ) : path === "/password-reset" ? (
                 <PasswordReset />
+              ) : path === "/admin" ? (
+                <AdminDashboard />
               ) : (
                 <Placeholder title={title} />
               )

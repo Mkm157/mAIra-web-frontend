@@ -1,3 +1,4 @@
+```jsx
 import {
   BrowserRouter,
   Routes,
@@ -6,12 +7,9 @@ import {
   Link,
 } from "react-router-dom";
 
- feat/admin-dashboard
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import AdminDashboard from "../admin/AdminDashboard";
-=======
+import PasswordReset from "../pages/PasswordReset";
 import Login from "../loginpage/Login";
- main
 
 const pages = [
   ["Registration", "/registration"],
@@ -54,15 +52,18 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Home Page */}
         <Route path="/" element={<Home />} />
- feat/admin-dashboard
+
         {pages.map(([title, path]) => (
           <Route
             key={path}
             path={path}
             element={
-              path === "/admin" ? (
+              path === "/login" ? (
+                <Login />
+              ) : path === "/password-reset" ? (
+                <PasswordReset />
+              ) : path === "/admin" ? (
                 <AdminDashboard />
               ) : (
                 <Placeholder title={title} />
@@ -70,30 +71,13 @@ export default function AppRoutes() {
             }
           />
         ))}
-        <Route path="*" element={<Navigate to="/" replace />} />
 
-
-        {/* Login Page */}
-        <Route path="/login" element={<Login />} />
-
-        {/* Other Application Pages */}
-        {pages
-          .filter(([name]) => name !== "Login")
-          .map(([title, path]) => (
-            <Route
-              key={path}
-              path={path}
-              element={<Placeholder title={title} />}
-            />
-          ))}
-
-        {/* Redirect Unknown Routes */}
         <Route
           path="*"
           element={<Navigate to="/" replace />}
         />
- main
       </Routes>
     </BrowserRouter>
   );
 }
+```

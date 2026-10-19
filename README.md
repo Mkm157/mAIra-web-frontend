@@ -75,6 +75,35 @@ The routes below are configured in `src/App.jsx`:
 
 **Routing note:** `AdminDashboardPage.jsx` exists, but `/admin` currently redirects to `/dashboard`; the admin page is imported but is not currently rendered by that route. Confirm the intended admin behavior before changing it.
 
+## User Journey
+
+The mAIra frontend provides navigation through the following user flows.
+
+### Registration Flow
+
+1. Open the landing page.
+2. Select the registration option.
+3. Proceed to the registration verification screen.
+4. Continue to the account password creation screen.
+5. View the registration success screen when the flow is completed.
+
+### Login Flow
+
+1. Open the landing page.
+2. Select the login option.
+3. Enter the required login details.
+4. Continue to the dashboard if authentication succeeds..
+
+### Password Recovery Flow
+
+1. Open the forgot-password screen.
+2. Select the available recovery method.
+3. Enter the verification code.
+4. Create a new password.
+5. Reach the recovery success screen.
+
+**Note:** These flows describe the intended navigation. Actual authentication, verification, and password changes depend on the backend integration.
+
 ## Features implemented in the frontend
 
 Based on the current page and component structure, the frontend includes:
@@ -159,6 +188,8 @@ If an API client or environment setup is introduced, document its location and r
 ## Contribution / handoff checklist
 
 - [ ] Install dependencies with `npm install`.
+
+
 - [ ] Run the app with `npm run dev`.
 - [ ] Test the routes affected by the change.
 - [ ] Run `npm run build`.

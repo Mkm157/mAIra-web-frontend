@@ -1,4 +1,3 @@
-```jsx
 import {
   BrowserRouter,
   Routes,
@@ -80,4 +79,3 @@ export default function AppRoutes() {
     </BrowserRouter>
   );
 }
-```

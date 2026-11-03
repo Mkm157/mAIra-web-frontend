@@ -8,7 +8,7 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import RecoveryVerifyPage from './pages/RecoveryVerifyPage';
 import RecoveryPasswordPage from './pages/RecoveryPasswordPage';
 import RecoverySuccessPage from './pages/RecoverySuccessPage';
-import AdminDashboardPage from './pages/AdminDashboardPage';
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 import UserDashboardPage from './pages/UserDashboardPage';
 
 export default function App() {
@@ -43,7 +43,7 @@ export default function App() {
         <Route path="/register/success" element={<RecoverySuccessPage />} />
 
         {/* Enterprise Admin Dashboard (Bypassed as requested - redirects to dashboard) */}
-        <Route path="/admin" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/admin" element={<AdminDashboardPage />} />
 
         {/* Screen 9: Authenticated User Workspace Dashboard */}
         <Route path="/dashboard" element={<UserDashboardPage />} />

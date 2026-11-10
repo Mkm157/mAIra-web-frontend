@@ -43,7 +43,7 @@ export default function App() {
         <Route path="/register/success" element={<RecoverySuccessPage />} />
 
         {/* Enterprise Admin Dashboard (Bypassed as requested - redirects to dashboard) */}
-        <Route path="/admin" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/admin" element={<AdminDashboardPage />} />
 
         {/* Screen 9: Authenticated User Workspace Dashboard */}
         <Route path="/dashboard" element={<UserDashboardPage />} />
